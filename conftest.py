@@ -3,7 +3,7 @@ import pytest
 import requests
 
 
-url_dog_ceo = 'https://dog.ceo/dog-api/'
+url_dog_ceo = 'https://dog.ceo/api/'
 url_openbrewry = 'https://www.openbrewerydb.org/'
 url_json_placeholder = 'https://jsonplaceholder.typicode.com/'
 
@@ -28,7 +28,7 @@ def pytest_addoption(parser):
     """Парсер для выбора целевого линка до старта теста"""
     parser.addoption('--url',
                      action='store',
-                     default='https://dog.ceo/dog-api/',
+                     default='https://dog.ceo/api',
                      help='Target link for request')
 
 @pytest.fixture(scope='session')
