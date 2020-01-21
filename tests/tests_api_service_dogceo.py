@@ -2,20 +2,18 @@ import pytest
 import requests
 import json
 
-main_page_url = 'https://dog.ceo/dog-api/'
-breed_list_url = 'https://dog.ceo/api/breeds/list/all'
+# main_page_url = 'https://dog.ceo/dog-api/'
+# breed_list_url = 'https://dog.ceo/api/breeds/list/all'
 
-def test_check_status_code():
-    response = requests.get(main_page_url)
+def test_check_status_code(api_client):
+    response = api_client.get()
     status_code = response.status_code
     assert status_code == 200
 
-@pytest.mark.parametrize('content_type', ['Content-Type'])
-def test_check_headers(content_type):
-    response = requests.get(main_page_url)
-    header = response.headers[content_type]
+def test_json_not_empty(api_client):
+    response = api_client.get(path='/breeds/image/random')
+    assert response.json() != []
 
-    assert header in 'text/html; charset=UTF-8'
 
 def test_encoding():
     response = requests.get(main_page_url)
