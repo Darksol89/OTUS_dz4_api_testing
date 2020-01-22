@@ -3,12 +3,10 @@ import pytest
 from jsonschema import validate
 
 
-@pytest.mark.parametrize('status', ['200'])
-def test_api_status_code(api_client, status):
+def test_api_status_code(api_client):
     """Тест на возвращение статус кода 200"""
     response = api_client.get()
-    status_code = response.status_code
-    assert status_code == int(status)
+    assert response.ok
 
 
 def test_api_json_not_empty(api_client):
@@ -52,3 +50,5 @@ def test_api_json_scheme(api_client):
     }
 
     validate(instance=response.json(), schema=schema)
+
+
