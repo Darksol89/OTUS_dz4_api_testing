@@ -36,12 +36,4 @@ def pytest_addoption(parser):
 @pytest.fixture(scope='session')
 def api_client(request):
     base_url = request.config.getoption("--url")
-    if base_url == 'https://dog.ceo/api':
-        print('API general_api_tests running to dog.ceo.api site')
-        return APIClient(base_address=base_url)
-    elif base_url == 'https://api.openbrewerydb.org':
-        print('API general_api_tests running to openbrewery site')
-        return APIClient(base_address=base_url)
-    elif base_url == 'https://jsonplaceholder.typicode.com':
-        print('API general_api_tests running to jsonholderplace site')
-        return APIClient(base_address=base_url)
+    return APIClient(base_address=base_url)
