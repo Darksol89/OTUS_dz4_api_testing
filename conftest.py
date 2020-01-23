@@ -3,9 +3,9 @@ import pytest
 import requests
 
 
-url_dog_ceo = 'https://dog.ceo/api/'
-url_openbrewry = 'https://www.openbrewerydb.org/'
-url_json_placeholder = 'https://jsonplaceholder.typicode.com/'
+url_dog_ceo = 'https://dog.ceo/api'
+url_openbrewry = 'https://www.openbrewerydb.org'
+url_json_placeholder = 'https://jsonplaceholder.typicode.com'
 
 class APIClient:
     """Клиент для рабоыт с API.
@@ -28,14 +28,20 @@ def pytest_addoption(parser):
     """Парсер для выбора целевого линка до старта теста"""
     parser.addoption('--url',
                      action='store',
-                     default='https://dog.ceo/api',
+                     default='https://api.openbrewerydb.org',
                      help='Target link for request')
 
 @pytest.fixture(scope='session')
 def api_client(request):
     base_url = request.config.getoption("--url")
-    return APIClient(base_address=base_url)
-
-
+    if base_url == 'https://dog.ceo/api':
+        print('API tests running to dog.ceo.api site')
+        return APIClient(base_address=base_url)
+    elif base_url == 'https://api.openbrewerydb.org':
+        print('API tests running to openbrewery site')
+        return APIClient(base_address=base_url)
+    elif base_url == 'https://jsonplaceholder.typicode.com':
+        print('API tests running to jsonholderplace site')
+        return APIClient(base_address=base_url)
 
 
