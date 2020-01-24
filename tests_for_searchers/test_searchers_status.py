@@ -1,6 +1,5 @@
-"""Тест на получение кодировки выбранного поисковика"""
+"""Тест на получение статус кода"""
 
 
 def test_searchers(get_url, get_status_code):
-    print(get_url.encoding)
-    print('\nTest finished')
+    assert get_status_code == 200
