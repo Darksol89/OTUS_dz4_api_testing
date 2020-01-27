@@ -20,11 +20,12 @@ def pytest_addoption(parser):
 def get_url(request):
     """Фикстура получения ссылки из параметра ком.строки"""
     url = request.config.getoption('--url')
-    return requests.get(url)
+    api_get_url = requests.get(url)
+    return api_get_url.status_code
 
 
 @pytest.fixture()
-def get_status_code(request, get_url):
+def get_status_code(request):
     """Фикстура получения кода состояния из параметра ком.строки"""
-    request.config.getoption('--status_code')
-    return get_url.status_code
+    status_cmd = request.config.getoption('--status_code')
+    return status_cmd
